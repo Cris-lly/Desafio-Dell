@@ -1,0 +1,9 @@
+/* Personalizando a altura da barra de rolagem */
+.scrollBar{
+    overflow: auto; direction: rtl;
+   
+}
+
+
+
+

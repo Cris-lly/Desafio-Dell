@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { IAppState, modifyValue } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -8,20 +11,25 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 })
 export class PokemonListComponent implements OnInit {
   listPokemons= [{name: '', url:""},];
-  numberPokemon = 0;
-  position:number = 0;
-  constructor(public pokemonService:PokemonService) { }
+  constructor(public pokemonService:PokemonService, private store: Store<{app: IAppState}>) { }
+  
+  idPokemon$ = this.store.select('app')
+  .pipe(
+    map(e=> e.idPokemon)
+  );
 
+  modifyValue(num: number){
+    this.store.dispatch(modifyValue({newValue: num}))
+  }
   getPokemonInfo(): void {
-    this.pokemonService.loadPokemon().subscribe((pokemons) => {
+    this.pokemonService.loadAllPokemons().subscribe((pokemons) => {
       
-      this.listPokemons = pokemons.results;
+      this.listPokemons = pokemons.results; 
+    
     }
   );
   }
-  sendNumber(number: number){
-    this.numberPokemon = number+1;
-  }
+  
   ngOnInit(): void {
     this.getPokemonInfo();
   }

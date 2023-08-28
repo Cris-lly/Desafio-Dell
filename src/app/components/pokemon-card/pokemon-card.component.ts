@@ -1,27 +1,29 @@
-import { Component, Input, OnInit} from '@angular/core';
-
+import { Component, Input, OnInit, OnChanges} from '@angular/core';
+import { Pokemon } from 'src/app/models/pokemon.model';
+import { PokemonService } from 'src/app/services/pokemon.service';
 @Component({
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.css']
 })
 export class PokemonCardComponent implements OnInit {
-  @Input() numberPokemon = [{name: '', url:""},];
-  @Input() receivedNumber = 0;
-  constructor() { }
+  @Input() listPokemons = [{name: '', url:""},];
+  @Input() idPokemon = 1;
+  pokemon?: Pokemon;
+  constructor(public pokemonService: PokemonService) { }
 
   ngOnInit(): void {
   }
-  formatUrlImage(){
-    const formatNumber = this.leadingZero(this.receivedNumber)
-
-    return `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatNumber}.png`
+  ngOnChanges(): void{
+    this.getInfoPokemon();
+    
   }
-  leadingZero(value: number, size = 3){
-    let number = String(value);
-    while(number.length < (size || 2)){
-      number = '0'+ number;
+  
+  getInfoPokemon():void{
+    this.pokemonService.loadPokemon(this.idPokemon).subscribe((pokemons) => {   
+      this.pokemon = pokemons; 
     }
-    return number;
+  );
+
   }
 }

@@ -1,5 +1,70 @@
-<div class="bg-danger vh-100">
-    <div>
-        <img [src]="formatUrlImage()" alt="" srcset=""> 
+<div class="vh-100">
+    <div class="row w-100 mt-2">
+        <div class="col-4  pokemonBanner  mt-5">
+            <img [src]="pokemon?.image" alt="" srcset="" class="mt-5 h-100 w-100">
+        </div>
+        <div class="col-8 mt-lg-5 mh-75">
+            <div class="row">
+                <div class=" h-50 mt-3 col-11 m-auto pokemonTitle row">
+                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <h4 class="text-white ms-lg-2 fs-5">{{pokemon?.name}}</h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row  col-10 m-auto">
+                <div class="mt-4 p-0  w-100">
+                    <div class="p-0 m-0 col-12 row table-responsive">
+                        <table class="col table table-secondary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">First</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="col table table-white">
+                            <thead>
+                                <tr>
+                                    <th scope="col">First</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-white p-2 col-10 m-auto">
+                <p class="text-center">Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod
+                    tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at vero eos et accusam et
+                    justo duo dolores et ea rebum stet clita kasd gubergren no sea takimata sanctus est lorem ipsum
+                    dolor sit amet.
+
+                    Minim diam at ipsum tempor.
+                </p>
+
+            </div>
+        </div>
     </div>
 </div>
