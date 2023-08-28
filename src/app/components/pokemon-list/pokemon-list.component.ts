@@ -11,6 +11,7 @@ import { IAppState, modifyValue } from 'src/app/store/app.state';
 })
 export class PokemonListComponent implements OnInit {
   listPokemons= [{name: '', url:""},];
+  imagePokemon = ['',]
   constructor(public pokemonService:PokemonService, private store: Store<{app: IAppState}>) { }
   
   idPokemon$ = this.store.select('app')
@@ -22,14 +23,17 @@ export class PokemonListComponent implements OnInit {
     this.store.dispatch(modifyValue({newValue: num}))
   }
   getPokemonInfo(): void {
-    this.pokemonService.loadAllPokemons().subscribe((pokemons) => {
+    this.pokemonService.loadAllPokemons().subscribe((pokemons) => {     
       
-      this.listPokemons = pokemons.results; 
-    
+      this.listPokemons = pokemons.results
+      
     }
   );
   }
   
+  showImage(){
+
+  }
   ngOnInit(): void {
     this.getPokemonInfo();
   }

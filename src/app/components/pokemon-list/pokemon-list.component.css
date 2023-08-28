@@ -1,9 +1,25 @@
 /* Personalizando a altura da barra de rolagem */
-.scrollBar{
-    overflow: auto; direction: rtl;
-   
+.scrollBar {
+  overflow: auto;
+  overflow-x: hidden;
+  
+  height: 75vh;
+}
+.scrollBar::-webkit-scrollbar-track {
+  background: #f9ecdf; /* Cor de fundo da trilha */
+  border-radius: 20px;
+}
+.scrollBar::-webkit-scrollbar-thumb {
+  background: #fa6b50; /* Cor da alça da barra de rolagem */
+  border-radius: 20px;
 }
 
+.linkPokemon:hover {
+  background: linear-gradient(135deg, #f9442c 50%, black 50%);
+  color: #fff;
+  border-radius: 1.5rem;
+}
 
-
-
+.iconNavPokemon{
+  width: 40%;
+}

@@ -1,14 +1,23 @@
-<div class="vh-100">
+<div class="vh-75">
     <div class="row w-100 mt-2">
         <div class="col-4  pokemonBanner  mt-5">
             <img [src]="pokemon?.image" alt="" srcset="" class="mt-5 h-100 w-100">
         </div>
         <div class="col-8 mt-lg-5 mh-75">
             <div class="row">
-                <div class=" h-50 mt-3 col-11 m-auto pokemonTitle row">
-                    <div class="col-6"></div>
-                    <div class="col-6">
-                        <h4 class="text-white ms-lg-2 fs-5">{{pokemon?.name}}</h4>
+                <div class=" h-50 mt-3 col-11 m-auto pokemonTitle row m-0 p-0">
+                    <div class="col-6 m-0 p-0">
+
+                        
+                        <img [src]="pokemon?.icon" srcset="" class="d-inline pokemonIcon">
+                        
+                        <h4 class="text-white fs-5 d-inline">
+                            No. {{pokemonService.renamePokemonNumber(idPokemon)}}
+                        </h4>
+
+                    </div>
+                    <div class="col-6 d-flex align-items-center">
+                        <h4 class="text-white fs-5">{{pokemon?.name | titlecase}}</h4>
                     </div>
 
                 </div>
@@ -16,39 +25,31 @@
             <div class="row  col-10 m-auto">
                 <div class="mt-4 p-0  w-100">
                     <div class="p-0 m-0 col-12 row table-responsive">
-                        <table class="col table table-secondary">
+                        <table class="table table-secondary">
                             <thead>
                                 <tr>
-                                    <th scope="col">First</th>
+                                    <td scope="col" class="text-center">Type</td>
+                                    <td scope="col" class="bg-white">
+                                        <ul class="d-flex align-items-center m-0 p-0">
+                                            <li *ngFor="let type of pokemon?.type" class="d-inline bg-dark rounded text-white m-1 p-2">
+                                                {{type | uppercase}}
+
+                                            </li>
+                                        </ul>
+                                    </td>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <td scope="row" class="text-center">Height</td>
+                                    <td class="bg-white">{{pokemon?.height}}m</td>
+
                                 </tr>
                                 <tr>
-                                    <th scope="row">2</th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="col table table-white">
-                            <thead>
-                                <tr>
-                                    <th scope="col">First</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
+                                    <td scope="row" class="text-center">Weight</td>
+                                    <td class="bg-white">{{pokemon?.weight}}kg / {{convertToLbs(pokemon?.weight)}} lbs.</td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -56,12 +57,8 @@
                 </div>
             </div>
             <div class="row bg-white p-2 col-10 m-auto">
-                <p class="text-center">Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod
-                    tempor invidunt ut labore et dolore magna aliquyam erat sed diam voluptua at vero eos et accusam et
-                    justo duo dolores et ea rebum stet clita kasd gubergren no sea takimata sanctus est lorem ipsum
-                    dolor sit amet.
-
-                    Minim diam at ipsum tempor.
+                <p class="text-center">
+                    {{pokemonDescription}}
                 </p>
 
             </div>
