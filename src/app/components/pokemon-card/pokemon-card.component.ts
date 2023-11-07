@@ -8,7 +8,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
   styleUrls: ['./pokemon-card.component.css']
 })
 export class PokemonCardComponent implements OnInit {
-  @Input() listPokemons = [{name: '', url:""},];
+  @Input() listPokemons = [{name: '', url:"", id:0},];
   @Input() idPokemon = 1;
   pokemon?: Pokemon;
   pokemonDescription= ['',]

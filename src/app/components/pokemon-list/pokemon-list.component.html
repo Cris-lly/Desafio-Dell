@@ -1,60 +1,114 @@
-<div class="row ">
-
-
-    <div class="col-lg-3 col-sm-4 bg-white">
-        <label class="mt-3 text-secondary">
-            Generation
-        </label>
-        <select class="form-select mt-1" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mt-2">
-            <div class="row">
-
-                <button class="navbar-toggler border-0 col-2" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon  text-end">
-                        <img src="../../../assets/images/plus-icon.png" class="w-100" srcset="">
-                    </span>
-                </button>
-                <span class="navbar-toggler border-0 col-10">
-                    <h4>Choose your pokemon! </h4>
-
-                </span>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ps-5 pe-4 flex-column scrollBar mt-1">
-                    <li class="nav-item rounded w-100" *ngFor="let pokemon of listPokemons; index as idPokemon">
-                        <a href="#" class=" list-group-item list-group-item-action text-start"
-                                (click)="modifyValue(idPokemon+1)">
-                            <div class="row linkPokemon">
-
-                                <div class="col-6">
-                                    
-                                    <p class="m-0  p-1"><img [src]="pokemonService.showImage(idPokemon+1)"  class="iconNavPokemon" srcset="">No. {{pokemonService.renamePokemonNumber(idPokemon+1)}}</p>    
-                                </div>
-                                <div class="col-6">
-                                    <p class="m-0 pt-2">{{pokemon.name | titlecase}}</p>
-                                
-                                    
-                                </div>
+<div class="row">
+    <nav class="p-0 col-lg-3  navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="bg-white vh-100 w-100">
+            
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                                role="tab" aria-controls="home" aria-selected="true">Home</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link " id="filter-tab" data-bs-toggle="tab" data-bs-target="#filter" type="button"
+                                role="tab" aria-controls="filter" aria-selected="false">filter</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            
+                            <label class="mt-3 text-secondary">
+                                Generation
+                            </label>
+                            <select class="form-select mt-1" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <div class="listHome mt-3" >
+                                <ul class="ps-4 pe-4  no-list-marker scrollBar h-100">
+                                    <li *ngFor="let pokemon of listPokemons;">
+                                        <a href="#" class=" list-group-item list-group-item-action text-start"
+                                            (click)="modifyValue(pokemon.id)">
+                                            <div class="row linkPokemon">
+            
+                                                <div class="col-6">
+            
+                                                    <p class="m-0  p-1"><img [src]="pokemonService.showImage(pokemon.id)"
+                                                            class="iconNavPokemon" srcset="">No.
+                                                        {{pokemonService.renamePokemonNumber(pokemon.id)}}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p class="m-0 pt-2">{{pokemon.name | titlecase}}</p>
+            
+            
+                                                </div>
+                                            </div>
+                                        </a>
+    
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
+                        </div>
 
-                    </li>
-                </ul>
+                        <div class="tab-pane fade" id="filter" role="tabpanel" aria-labelledby="filter-tab">
+                            <form class="">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail" class="form-label">Search for:</label>
+                                    <select [(ngModel)]="selectOption" name="selectOption" class="form-select mt-1"
+                                        aria-label="Default select example">
+                                        <option value="" selected>Select option</option>
+                                        <option value="number">Number</option>
+                                        <option value="name">Name</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3" *ngIf="selectOption == 'number' and selectOption != '' ">
+                                    <label for="searchPokemon" class="form-label">Type the {{selectOption}}:</label>
+                                    <input [(ngModel)]="searchNumber" name="searchText" type="text" class="form-control" id="searchPokemon"
+                                    >
+                                </div>
+                                <div class="mb-3" *ngIf="selectOption == 'name' and selectOption != '' ">
+                                    <label for="searchPokemon" class="form-label">Type the {{selectOption}}:</label>
+                                    <input [(ngModel)]="searchText" name="searchText" type="text" class="form-control" id="searchPokemon"
+                                    >
+                                </div>
+                            </form>
+                            <div class="listFilter mt-3">
+                                <ul class="ps-4 pe-4  no-list-marker scrollBar h-100" >
+                                    <li  *ngFor="let pokemon of filteredItems(selectOption);">
+                                        <a href="#" class=" list-group-item list-group-item-action text-start"
+                                            (click)="modifyValue(pokemon.id)">
+                                            <div class="row linkPokemon">
+                                                <div class="col-6">
+                                                    <p class="m-0  p-1"><img [src]="pokemonService.showImage(pokemon.id)"
+                                                            class="iconNavPokemon" srcset="">No.
+                                                        {{pokemonService.renamePokemonNumber(pokemon.id)}}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    
+                                                    <p class="m-0 pt-2 text-end">{{pokemon.name | titlecase}}</p>
 
+                                                    
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-        </nav>
-    </div>
-
-
+        </div>
+    </nav>
     <app-pokemon-card [listPokemons]="listPokemons" [idPokemon]="(idPokemon$ | async) || 0"
-        class=" col-lg-9  col-sm-8 bg-danger"></app-pokemon-card>
+        class=" col-lg-9 vh-100 bg-danger"></app-pokemon-card>
 
 </div>

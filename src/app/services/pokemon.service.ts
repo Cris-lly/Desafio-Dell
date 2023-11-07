@@ -30,7 +30,9 @@ export class PokemonService {
       })
     );
   }
-
+  loadAllType(){
+    return this.httpClient.get<any>(`${this.apiUrl}type/`);
+  }
   loadDescription(id: number): Observable<any> {
     const req = this.httpClient.get<any>(`${this.apiUrl}pokemon-species/${id}`);
     return req;
